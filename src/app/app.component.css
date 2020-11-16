@@ -1,0 +1,7 @@
+p {
+  font-family: Lato;
+}
+:host {
+  width: 400px;
+  display: block;
+}

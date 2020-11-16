@@ -1,0 +1,13 @@
+<main #slideMain (mouseup)="outside()" (mouseleave)="outside()" (document:mousemove)="update($event)">
+	<article>
+		<span>{{hintText}}</span>
+	</article>
+	<aside #slidePanel>
+		<div class="theRest">
+			<span #slidePanelSpan [ngClass]="locked ? 'confirmed' : 'nonConfirmed'">{{successText}}</span>
+		</div>
+		<div (mousedown)="drag($event)" class="slideButton">
+			<span>☰</span>
+		</div>
+	</aside>
+</main>
