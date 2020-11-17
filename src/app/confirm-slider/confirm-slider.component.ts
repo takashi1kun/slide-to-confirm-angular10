@@ -13,7 +13,7 @@ import {
   templateUrl: "./confirm-slider.component.html",
   styleUrls: ["./confirm-slider.component.scss"]
 })
-export class ConfirmSliderComponent implements OnInit {
+export class ConfirmSliderComponent {
   constructor() {}
 
   x: number = 25;
@@ -28,21 +28,21 @@ export class ConfirmSliderComponent implements OnInit {
   @Input() hintText: string = "Deslice pare Confirmar";
   @Input() successText: string = "Confirmado";
 
-  async drag(e: MouseEvent) {
-    if (this.locked == false) {
+  async drag(e: MouseEvent): Promise<void> {
+    if (!this.locked) {
       this.slider.nativeElement.style.transition = "";
       this.enableUpdate = true;
     }
   }
-  async update(e: MouseEvent) {
+  async update(e: MouseEvent): Promise<void> {
     if (this.enableUpdate) {
       this.x = Math.min(e.x, this.sliderMain.nativeElement.clientWidth + 1);
       this.slider.nativeElement.style.left = "calc(-100% + " + this.x + "px)";
       if (e.x > this.sliderMain.nativeElement.clientWidth + 5) this.outside();
     }
   }
-  outside() {
-    if (this.enableUpdate == true) {
+  outside(): void {
+    if (this.enableUpdate) {
       this.enableUpdate = false;
       if (this.x >= this.sliderMain.nativeElement.clientWidth) {
         this.locked = true;
@@ -55,5 +55,4 @@ export class ConfirmSliderComponent implements OnInit {
       }
     }
   }
-  ngOnInit() {}
 }
